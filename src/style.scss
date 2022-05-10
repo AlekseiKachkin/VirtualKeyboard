@@ -5,6 +5,10 @@
     width: 740px;
     height: 400px;
     background-color: $colorLight;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
     margin: 0 auto;
 }
 
@@ -37,20 +41,26 @@
     height: 40px;
     border-radius: 3px;
     background-color: $colorTextBTN;
-    transition: 0.3s;  
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;    
+    transition: 0.3s;
+    &:hover{
+        transition: 0.3s;        
+        cursor: pointer;
+    }
 }
 
 .button-text {
     width: 40px;
     background-color: $colorTextBTN;
-    color: $colorLight;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    font-weight: 400;
+    color: $colorLight;    
     &:hover{
         background-color: $colorTextBTNActive;
         transition: 0.3s;
-        font-weight: 500;
     }
 }
 
@@ -62,23 +72,26 @@
     width: 86px;
 }
 
-
+.space {
+    width: 275px;
+}
 
 .caps-lock, .backspace{
     width: 100px;
 }
 
 .tab{
-    width: 50px;
+    width: 75px;
 }
 
-.tilda, .win, .alt, .right-shift, .del, .run{
+.tilda{
     width: 40px;
 }
 
 .button-manage{
     background-color: $colorManageBTN;
     transition: 0.3s;
+    color: $colorManageText;
 
     &:hover{
         transition: 0.3s;
