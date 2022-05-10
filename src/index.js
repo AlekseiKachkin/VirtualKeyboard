@@ -33,7 +33,7 @@ import './style.scss';
 
 const controls = ['`', '~', 'Backspace', 'Tab', 'DEL','Caps Lock', 'Enter', '⇧ Shift', '▲', 'Ctrl' , 'Win', 'Alt', ' ', '⮜', '▼', '⮞', '⇧'];
 
-let currentLang = 'eng';
+let currentLang = 'ru';
 
 const WRAPPER = document.createElement('div');
 const TEXTAREA = document.createElement('textarea');
