@@ -10,7 +10,7 @@ const keyboardCharEnBig = [
                             ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace'], 
                             ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', 'DEL'],
                             ['Caps Lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"',  'Enter'],
-                            ['⇧ Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', '▲', '⇧'],
+                            ['⇧ Shift', '|', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', '▲', '⇧'],
                             ['Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl', '⮜', '▼', '⮞']
                           ];
 
@@ -33,8 +33,8 @@ import './style.scss';
 
 const controls = ['`', '~', 'Backspace', 'Tab', 'DEL','Caps Lock', 'Enter', '⇧ Shift', '▲', 'Ctrl' , 'Win', 'Alt', ' ', '⮜', '▼', '⮞', '⇧'];
 
-let currentLang = 'ru';
-
+let currentLang = 'eng';
+let size = 'Lower';
 const WRAPPER = document.createElement('div');
 const TEXTAREA = document.createElement('textarea');
 const BODY = document.querySelector('body');
@@ -46,12 +46,22 @@ WRAPPER.classList.add('wrapper');
 TEXTAREA.classList.add('text-area');
 KEYBOARD.classList.add('buttons-wrap');
 
-function addRow(lang, i){
+function addRow(lang, i, size){
   let letterArray;
   if (lang === 'eng') {
-    letterArray = keyboardCharEn
+    if (size === 'Lower') {
+      letterArray = keyboardCharEn;
+    } else {
+      letterArray = keyboardCharEnBig;
+    }
+    
   } else {
-    letterArray = keyboardCharRu
+    if (size === 'Lower'){
+      letterArray = keyboardCharRu;
+    } else {
+      letterArray = keyboardCharRuBig;
+    }
+    
   }
   const ROW = document.createElement('div');
   KEYBOARD.append(ROW);
@@ -80,9 +90,11 @@ function addRow(lang, i){
         BTN.classList.add('tilda');
         break;
       case 'Backspace':
-      case 'Caps Lock':
-      case '⇧ Shift':
+      case 'Caps Lock':      
         BTN.classList.add('backspace');
+        break;
+      case '⇧ Shift':
+        BTN.classList.add('shift');
         break;
       case 'Tab':
         BTN.classList.add('tab');
@@ -99,8 +111,33 @@ function addRow(lang, i){
 
     }    
   })
+  
+}
+function addKeyboard(){
+  for(let i = 0; i < 5; ++i) {
+    addRow(currentLang, i, 'Lower');
+  }  
 }
 
-for(let i = 0; i < 5; ++i) {
-  addRow(currentLang, i);
+addKeyboard();
+const SHIFT = document.querySelector('.shift');
+SHIFT.addEventListener('click', Shift);
+function Shift() {
+      KEYBOARD.innerHTML = '';            
+      for(let i = 0; i < 5; ++i) {
+      addRow(currentLang, i, 'Upper');
+      }
+      SHIFT.classList.add('button-manage_active');
+      SHIFT.removeEventListener('click', Shift);
+      SHIFT.addEventListener('click', UnShift);
+}
+
+function UnShift() {
+  KEYBOARD.innerHTML = '';  
+  for(let i = 0; i < 5; ++i) {
+  addRow(currentLang, i, 'Lower');
+  }
+  SHIFT.classList.remove('button-manage_active');      
+  SHIFT.removeEventListener('click', UnShift);
+  SHIFT.addEventListener('click', Shift);
 }
